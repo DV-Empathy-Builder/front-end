@@ -1,13 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import Login from './components/Login'
-import Register from './components/Register'
-import PrivateRoute from './components/PrivateRoute'
-import Dashboard from './components/Dashboard'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import Login from './Container/Login';
+import Register from './Container/Register';
+import PrivateRoute from './components/PrivateRoute';
+import Dashboard from './Container/Dashboard';
 
-import 'semantic-ui-css/semantic.min.css'
+import 'semantic-ui-css/semantic.min.css';
 
 
 
