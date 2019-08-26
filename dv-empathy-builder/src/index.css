@@ -11,3 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.step-one-personal-m {
+	height: 28px;
+	width: 469px;
+	color: #4A4E53;
+	font-family: Roboto;
+	font-size: 21px;
+	font-weight: 500;
+	letter-spacing: 2px;
+	line-height: 28px;
+	text-align: center;
+}

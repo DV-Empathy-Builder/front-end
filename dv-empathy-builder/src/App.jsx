@@ -1,11 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-
+import FormExampleSize from "./components/monthly-budget"
 function App() {
   return (
     <div className="App">
-      
+      <FormExampleSize/>
     </div>
   );
 }

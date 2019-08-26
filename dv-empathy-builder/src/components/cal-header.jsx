@@ -7,3 +7,5 @@ const CalHeader = () => {
         </header>
     )
 }
+
+export default CalHeader;
