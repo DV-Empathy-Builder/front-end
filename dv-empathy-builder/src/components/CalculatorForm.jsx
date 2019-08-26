@@ -9,15 +9,7 @@ const MonthlyBudgetForm = () => (
         <h3>STEP ONE: PERSONAL MONTHLY BUDGET</h3>
         <p>If none, enter $0 (Zero)</p>
         </div>
-        <Form>
-            <Field type="text" name="carpayment" placeholder="0"/>
-        </Form>
-        <Form>
-            <Field type="text" name="carinsurance" placeholder="0"/>
-        </Form>
-        <Form>
-            <Field type="text" name="cargas" placeholder="0"/>
-        </Form>
+        
     </div>
 )
 export default MonthlyBudgetForm;
