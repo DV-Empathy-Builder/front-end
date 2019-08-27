@@ -29,7 +29,7 @@ const FormikForm = withFormik({
     }
   },
   handleSubmit(values, props) {
-    axios.post('dv-empathy.herokuapp.com/auth/login', values)
+    axios.post('https://dv-empathy.herokuapp.com/auth/login', values)
       .then(res => {
         localStorage.setItem('token', res.data.payload)
       })

@@ -2,7 +2,23 @@ import Settings from './DashboardSettings'
 import React, { Fragment as ComponentThatMightBeExported } from 'react'
 
 const Dashboard = ()=>{
-const isLoggedIn = true;
+const isLoggedIn = localStorage.getItem("token"); //get the localstorage key to make login true
+
+
+// handleSubmit(values, props) {
+//     axios.post('dv-empathy.herokuapp.com/auth/login', values)
+//       .then(res => {
+//         localStorage.setItem('token', res.data.payload)
+//       })
+//       .then(res => setTimeout(() => {
+//         props.props.history.push('/')
+//       }, 1000))
+//       .catch(err => console.log(err))
+//   }
+
+
+
+
 
     return( <>
         <div><h2>Dashboard Page Component</h2></div>
@@ -20,11 +36,11 @@ const isLoggedIn = true;
         <div className="form">
             Bogus Inputs
             <form>
-                <input name="name" placeholder="demo1" className="bogus"/>
-                <input name="something" placeholder="demo2" className="bogus"/>
-                <input name="something else" placeholder="demo3" className="bogus"/>
-                <input name="something else again" placeholder="demo4" className="bogus"/>
-                <input name="something" placeholder="demo5" className="bogus"/>
+                <input type="number" name="name" placeholder="demo1" className="bogus"/>
+                <input type="number" name="something" placeholder="demo2" className="bogus"/>
+                <input type="number" name="something else" placeholder="demo3" className="bogus"/>
+                <input type="number" name="something else again" placeholder="demo4" className="bogus"/>
+                <input type="number" name="something" placeholder="demo5" className="bogus"/>
 
 
             </form>
@@ -33,11 +49,11 @@ const isLoggedIn = true;
         <div className="form">
             Bogus Inputs Side 2
             <form>
-                <input name="name" placeholder="demo1" className="bogus"/>
-                <input name="something" placeholder="demo2" className="bogus"/>
-                <input name="something else" placeholder="demo3" className="bogus"/>
-                <input name="something else again" placeholder="demo4" className="bogus"/>
-                <input name="something" placeholder="demo5" className="bogus"/>
+                <input type="number" name="name" placeholder="demo1" className="bogus"/>
+                <input type="number" name="something" placeholder="demo2" className="bogus"/>
+                <input type="number" name="something else" placeholder="demo3" className="bogus"/>
+                <input type="number" name="something else again" placeholder="demo4" className="bogus"/>
+                <input type="number" name="something" placeholder="demo5" className="bogus"/>
             </form>
         </div>
         </div>
