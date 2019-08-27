@@ -33,11 +33,6 @@ const CalculatorForm = () => {
             </div>
             
 
-        {/* {personalBudget.map((categories) => {
-          return(
-             <BudgetForm/>
-          )
-        })} */}
    
         </div>
     );    

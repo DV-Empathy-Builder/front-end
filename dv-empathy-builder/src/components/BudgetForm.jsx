@@ -13,5 +13,6 @@ const BudgetForm = (props) =>{
         </Form>
     )
 }
+FormInput
 
 export default BudgetForm;
