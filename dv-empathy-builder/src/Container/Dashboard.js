@@ -1,10 +1,20 @@
 import Settings from './DashboardSettings'
-import React, { Fragment as ComponentThatMightBeExported } from 'react'
+import React, { useEffect, Fragment as ComponentThatMightBeExported } from 'react'
 import ResultsPage from './ResultsPage';
+import {axiosWithAuth} from '../utils/axiosWithAuth'
 import {Route} from 'react-router-dom'
 
 const Dashboard = (props)=>{
 const isLoggedIn = localStorage.getItem("token"); //get the localstorage key to make login true
+useEffect(()=>{
+    axiosWithAuth()
+    .get('https://dv-empathy.herokuapp.com/budgets')
+    .then(res => 
+        console.log(res, 'res'))
+        .catch(err => console.log(err.response))
+
+})
+
 const handleSubmit = (e) => {
     e.preventDefault()
     console.log('hello')
