@@ -1,11 +1,15 @@
 import Settings from './DashboardSettings'
 import React, { Fragment as ComponentThatMightBeExported } from 'react'
+import ResultsPage from './ResultsPage';
+import {Route} from 'react-router-dom'
 
-const Dashboard = ()=>{
+const Dashboard = (props)=>{
 const isLoggedIn = localStorage.getItem("token"); //get the localstorage key to make login true
 const handleSubmit = (e) => {
     e.preventDefault()
     console.log('hello')
+    console.log(props)
+    props.history.push('/something')
   }
 
     return( <>
@@ -43,8 +47,9 @@ const handleSubmit = (e) => {
            </div>
            <div className="calculate"><button type="submit">Calculate Cost</button></div>
 
+           {/* <Route path="/something" component={ResultsPage} /> */}
+
         </form>
-        {/* <button type="submit">Calculate Cost</button> */}
      </div>
         
 
