@@ -1,17 +1,17 @@
-
 import React from "react";
 import { Form as Formik, Field, withFormik } from "formik";
 import { Segment, Form, Button } from "semantic-ui-react";
 import FormInput from "./FormInput";
 import "../App.css";
-const BudgetForm = props => {
-  const personalBudget = props.categories.filter(function(cat) {
+const BudgetForm = ({ categories, values }) => {
+  const personalBudget = categories.filter(function(cat) {
     return cat.category_type === "Personal";
   });
 
-  const relocationBudget = props.categories.filter(function(cat) {
+  const relocationBudget = categories.filter(function(cat) {
     return cat.category_type === "Relocation";
   });
+  console.log(values);
   return (
     <div className="form-container">
       <Form className="form">
@@ -40,25 +40,19 @@ const BudgetForm = props => {
   );
 };
 //state names that will be assigned to formiks 'value'prop
-const FormikBudgetForm = withFormik(
-  {
-    //   mapPropsToValues({ category }) {
-    //     //State values.
-    //     //formName: statName
-    //     category: category.category || "";
-    //   };
-  }
+const FormikBudgetForm = withFormik({
+  mapPropsToValues({ categories }) {
+    //State values.
+    //formName: statName
+    let obj = {};
+    categories.forEach(cat => (obj[cat.category_name] = 0));
+    console.log(categories);
+    return obj;
+  },
+
   //Handling a submit on the form
-  // handleSubmit(values, {setStatus, resetForm}){
-  //     axios
-  //     .post("url", values)
-  //     .then(res => {
-  //         console.log(res.data)
-  //         setStatus(res.data)
-  //         resetForm();
-  //     })
-  // }
-)(BudgetForm);
+  handleSubmit(values, { setStatus, resetForm }) {}
+})(BudgetForm);
 export default FormikBudgetForm;
 // export default BudgetForm;
 //map props to values here
@@ -67,4 +61,3 @@ export default FormikBudgetForm;
 //ontotal subimit action:
 //do reduce method on on both arries and add up for sum total
 //pass to total state
-
