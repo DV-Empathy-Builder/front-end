@@ -17,27 +17,32 @@
   color: #61dafb;
 }
 
-.bogus{
+.bogus {
   display: block;
 }
 
-
-.form{
+.form {
   margin: 0 40px;
 }
 
-.form-setting{
+.form-setting {
   display: inline-flex;
 }
 
-.dashboard-settings{
+.dashboard-settings {
   border: 2px solid black;
   margin: 50px;
   padding: 50px;
 }
 
-.calculate{
+.calculate {
   padding: 20px;
 }
 
+.form-container {
+  border: 2px black solid;
+}
 
+.form {
+  border: 2px red solid;
+}

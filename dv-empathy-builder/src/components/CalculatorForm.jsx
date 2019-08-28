@@ -14,12 +14,7 @@ const CalculatorForm = () => {
       })
       .catch(err => console.log(err.response));
   }, []);
-  console.log(personalBudget);
-  console.log(relocationBudget);
   if (!CategoriesState) return <h3>loading...</h3>;
-
-  console.log(personalBudget);
-  console.log(relocationBudget);
   return (
     <div className="budget-parent">
       <BudgetForm categories={CategoriesState} />
