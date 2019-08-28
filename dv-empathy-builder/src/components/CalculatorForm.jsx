@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 // import { Button, Divider, Form } from 'semantic-ui-react'
 
 import {axiosWithAuth} from '../utils/axiosWithAuth';
@@ -32,11 +33,9 @@ const CalculatorForm = () => {
                 <p>If none, enter $0 (Zero)</p>
 
             </div>    
-            <BudgetForm/>
+            {/* <BudgetForm/> */}
 
             </div>
-
-        </div>
     );    
 }
 
