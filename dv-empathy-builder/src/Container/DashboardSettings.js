@@ -40,7 +40,7 @@ function Settings(props, { values, errors, touched }) {
             <p></p>
             <div className='loginForm'>
                 <Form onSubmit={selectBudget}>
-                    {' '}
+                    <button>Add Budget</button>{' '}
                     {/* on submit, user is choosing a budget. use props.selectBudget and pass it this id - id is tracked in the selectedValue*/}
                     <Field
                         component='select'
@@ -52,7 +52,9 @@ function Settings(props, { values, errors, touched }) {
                         <option value='silver'>Silver</option>
                         <option value='platinum'>Platinum</option> */}
                     </Field>
-                    <button>Submit!</button>
+                    <button>View</button>
+                    <button>Remove</button>
+                    <button>Delete</button>
                 </Form>
             </div>
         </div>
