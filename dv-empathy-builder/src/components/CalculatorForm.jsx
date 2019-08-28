@@ -18,28 +18,11 @@ const CalculatorForm = () => {
   console.log(relocationBudget);
   if (!CategoriesState) return <h3>loading...</h3>;
 
-  const personalBudget = CategoriesState.filter(function(cat) {
-    return cat.category_type === "Personal";
-  });
-  const relocationBudget = CategoriesState.filter(function(cat) {
-    return cat.category_type === "Relocation";
-  });
   console.log(personalBudget);
   console.log(relocationBudget);
   return (
     <div className="budget-parent">
-      <div>
-        <h3>STEP ONE: PERSONAL MONTHLY BUDGET</h3>
-        <p>If none, enter $0 (Zero)</p>
-      </div>
-      <div>
-        <BudgetForm categories={personalBudget} />
-      </div>
-      <div className="relocation-parent">
-        <h3>STEP TWO: RECLOCATION COST</h3>
-        <p>If none, enter $0 (Zero)</p>
-        <BudgetForm categories={relocationBudget} />
-      </div>
+      <BudgetForm categories={CategoriesState} />
     </div>
   );
 };
