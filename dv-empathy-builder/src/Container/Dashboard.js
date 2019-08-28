@@ -5,6 +5,7 @@ import React, {
     Fragment as ComponentThatMightBeExported,
 } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import CalculatorForm from '../components/CalculatorForm';
 
 const Dashboard = props => {
     const [saveBudgetId, setSaveBudgetId] = useState();
@@ -16,13 +17,11 @@ const Dashboard = props => {
         if (saveBudgetId) {
             axiosWithAuth()
                 .get(`https://dv-empathy.herokuapp.com/budgets/${saveBudgetId}`)
-                .then(res => setSaveBudgetLines(res.data))
+                .then(res => setSaveBudgetLines(res.data)) //Need to add the functionality to store the data in setState
+
                 .catch(err => console.log(err.response));
         }
-
-        //Need to add the functionality to store the data in setState
-    }, [saveBudgetId]);
-    //UEH with a dependency [selectBudget] with axios call to budgets/:id
+    }, [saveBudgetId]); //UEH with a dependency [selectBudget] with axios call to budgets/:id
 
     //selectBudget function => create USH to track the selectedBudget, pass this down to settings
 
@@ -31,12 +30,6 @@ const Dashboard = props => {
 
         console.log('selectedValue', value);
         setSaveBudgetId(value); //id #
-
-        // saveBudgetLines.forEach(Obj => {
-        //     if (value === Obj.budget_name_id) {
-        //         setSaveBudgetId(Obj);
-        //     }
-        // });
     };
 
     const handleSubmit = e => {
@@ -45,7 +38,7 @@ const Dashboard = props => {
         console.log(props);
         props.history.push('/something');
     };
-    console.log('savearray', saveBudgetLines);
+    // console.log('savearray', saveBudgetLines);
     return (
         <>
             {/* {console.log('saveBudgetId', saveBudgetId)} */}
@@ -73,77 +66,11 @@ Have data saved from public component exported into isLoggedIn component */}
             <div>
                 <form onSubmit={handleSubmit}>
                     <div className='form-setting'>
-                        <div className='form'>
-                            Bogus Inputs
-                            <input
-                                type='text'
-                                name='budget_name'
-                                placeholder='Type budget name'
-                                className='bogus'
-                            />
-                            <input
-                                type='number'
-                                name='Car_Payment'
-                                placeholder='demo2'
-                                className='bogus'
-                            />
-                            <input
-                                type='number'
-                                name='Food'
-                                placeholder='demo3'
-                                className='bogus'
-                            />
-                            <input
-                                type='number'
-                                name='Student Loans'
-                                placeholder='demo4'
-                                className='bogus'
-                            />
-                            <input
-                                type='number'
-                                name='creditcards'
-                                placeholder='demo5'
-                                className='bogus'
-                            />
-                        </div>
-
-                        <div className='form'>
-                            Bogus Inputs Side 2
-                            <input
-                                type='number'
-                                name='name'
-                                placeholder='demo1'
-                                className='bogus'
-                            />
-                            <input
-                                type='number'
-                                name='something'
-                                placeholder='demo2'
-                                className='bogus'
-                            />
-                            <input
-                                type='number'
-                                name='something else'
-                                placeholder='demo3'
-                                className='bogus'
-                            />
-                            <input
-                                type='number'
-                                name='something else again'
-                                placeholder='demo4'
-                                className='bogus'
-                            />
-                            <input
-                                type='number'
-                                name='something'
-                                placeholder='demo5'
-                                className='bogus'
-                            />
-                        </div>
+                        <CalculatorForm />
                     </div>
-                    <div className='calculate'>
+                    {/* <div className='calculate'>
                         <button type='submit'>Calculate Cost</button>
-                    </div>
+                    </div> */}
 
                     {/* <Route path="/something" component={ResultsPage} /> */}
                 </form>

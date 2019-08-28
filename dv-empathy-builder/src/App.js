@@ -10,17 +10,17 @@ import "semantic-ui-css/semantic.min.css";
 import CalculatorForm from "./components/CalculatorForm";
 
 function App() {
-  return (
-    <Router>
-      <div className="App">
-        <CalculatorForm />
-        <Route exact path="/" component={Dashboard} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Register} />
-        <Route path="/something" component={ResultsPage} />
-      </div>
-    </Router>
-  );
+    return (
+        <Router>
+            <div className='App'>
+                {/* <CalculatorForm /> */}
+                <Route exact path='/' component={Dashboard} />
+                <Route exact path='/login' component={Login} />
+                <Route exact path='/signup' component={Register} />
+                <Route path='/something' component={ResultsPage} />
+            </div>
+        </Router>
+    );
 }
 
 export default App;
