@@ -6,6 +6,8 @@ import * as Yup from 'yup';
 function Settings(props, { values, errors, touched }) {
     const [saveBudget, setSaveBudget] = useState([]);
     const [selectedValue, setSelectedValue] = useState();
+    const initialFormState = { name: '' };
+    const [budgetName, setBudgetName] = useState(initialFormState);
     useEffect(() => {
         axiosWithAuth()
             .get('https://dv-empathy.herokuapp.com/budgets')
@@ -18,7 +20,7 @@ function Settings(props, { values, errors, touched }) {
         saveBudget.map(item => (
             <option value={item.budget_name_id}>{item.budget_name}</option>
         ));
-    // console.log('savebudget', saveBudget);
+    console.log('savebudget', saveBudget);
 
     //handleChanges function to track value of Field e.target.value
     const handleChanges = e => {
@@ -31,6 +33,12 @@ function Settings(props, { values, errors, touched }) {
         props.selectBudgetId(selectedValue); //holds current value of what's selected
     };
 
+    const handleInputChange = note => {
+        // const { name, value } = e.target;
+        // setBudgetName({ ...budgetName, [name]: value });
+        axiosWithAuth().post(`https://dv-empathy.herokuapp.com/budgets`, note);
+    };
+
     console.log('selectedValue', selectedValue);
 
     return (
@@ -39,8 +47,14 @@ function Settings(props, { values, errors, touched }) {
 
             <p></p>
             <div className='loginForm'>
+                <div>
+                    <form>
+                        <input />
+                        <button>Add Budget</button>
+                    </form>
+                </div>
                 <Form onSubmit={selectBudget}>
-                    <button>Add Budget</button>{' '}
+                    {' '}
                     {/* on submit, user is choosing a budget. use props.selectBudget and pass it this id - id is tracked in the selectedValue*/}
                     <Field
                         component='select'
