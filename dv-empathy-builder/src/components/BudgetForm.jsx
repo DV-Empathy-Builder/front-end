@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Form as Formik, Field, withFormik } from "formik";
 import { Segment, Form, Button } from "semantic-ui-react";
@@ -66,3 +67,4 @@ export default FormikBudgetForm;
 //ontotal subimit action:
 //do reduce method on on both arries and add up for sum total
 //pass to total state
+
