@@ -17,3 +17,27 @@
   color: #61dafb;
 }
 
+.bogus{
+  display: block;
+}
+
+
+.form{
+  margin: 0 40px;
+}
+
+.form-setting{
+  display: inline-flex;
+}
+
+.dashboard-settings{
+  border: 2px solid black;
+  margin: 50px;
+  padding: 50px;
+}
+
+.calculate{
+  padding: 20px;
+}
+
+
