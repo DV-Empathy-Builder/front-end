@@ -3,16 +3,14 @@ import { withFormik, Form, Field } from 'formik';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import * as Yup from 'yup';
 
-function Settings({ values, errors, touched }) {
+function Settings(props, { values, errors, touched }) {
     const [saveBudget, setSaveBudget] = useState([]);
-
+    const [selectedValue, setSelectedValue] = useState();
     useEffect(() => {
         axiosWithAuth()
             .get('https://dv-empathy.herokuapp.com/budgets')
-            .then(res => setSaveBudget(res.data))
+            .then(res => setSaveBudget(res.data)) //Need to add the functionality to store the data in setState
             .catch(err => console.log(err.response));
-
-        //Need to add the functionality to store the data in setState
     }, []);
 
     let options =
@@ -20,7 +18,20 @@ function Settings({ values, errors, touched }) {
         saveBudget.map(item => (
             <option value={item.budget_name_id}>{item.budget_name}</option>
         ));
-    console.log('savebudget', saveBudget);
+    // console.log('savebudget', saveBudget);
+
+    //handleChanges function to track value of Field e.target.value
+    const handleChanges = e => {
+        setSelectedValue(e.target.value);
+    };
+
+    const selectBudget = e => {
+        e.preventDefault();
+        console.log('selectedValue Inside Budget', selectedValue);
+        props.selectBudget(selectedValue); //holds current value of what's selected
+    };
+
+    console.log('selectedValue', selectedValue);
 
     return (
         <div className='message-box'>
@@ -28,14 +39,19 @@ function Settings({ values, errors, touched }) {
 
             <p></p>
             <div className='loginForm'>
-                <Form>
-                    <Field component='select' name='meal'>
+                <Form onSubmit={selectBudget}>
+                    {' '}
+                    {/* on submit, user is choosing a budget. use props.selectBudget and pass it this id - id is tracked in the selectedValue*/}
+                    <Field
+                        component='select'
+                        name='meal'
+                        value={selectedValue}
+                        onChange={handleChanges}>
                         {options}
                         {/* <option value='gold'>Gold</option>
                         <option value='silver'>Silver</option>
                         <option value='platinum'>Platinum</option> */}
                     </Field>
-
                     <button>Submit!</button>
                 </Form>
             </div>
@@ -59,7 +75,7 @@ const FormikForm = withFormik({
     //======END VALIDATION SCHEMA==========
 
     handleSubmit(values) {
-        console.log(values);
+        console.log('values', values);
         //THIS IS WHERE YOU DO YOUR FORM SUBMISSION CODE... HTTP REQUESTS, ETC.
     },
 })(Settings);
