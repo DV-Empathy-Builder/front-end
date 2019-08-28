@@ -1,16 +1,13 @@
-import React from 'react';
-import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Login from './Container/Login';
-import Register from './Container/Register';
-import PrivateRoute from './components/PrivateRoute';
-import Dashboard from './Container/Dashboard';
-import ResultsPage from './Container/ResultsPage';
-import 'semantic-ui-css/semantic.min.css';
-import CalculatorForm from './components/CalculatorForm';
-
-import 'semantic-ui-css/semantic.min.css';
-// import CalculatorForm from "./components/CalculatorForm";
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Login from "./Container/Login";
+import Register from "./Container/Register";
+import PrivateRoute from "./components/PrivateRoute";
+import Dashboard from "./Container/Dashboard";
+import ResultsPage from "./Container/ResultsPage";
+import "semantic-ui-css/semantic.min.css";
+import CalculatorForm from "./components/CalculatorForm";
 
 function App() {
     return (
