@@ -5,6 +5,8 @@ import Login from './Container/Login';
 import Register from './Container/Register';
 import PrivateRoute from './components/PrivateRoute';
 import Dashboard from './Container/Dashboard';
+import ResultsPage from './Container/ResultsPage';
+
 import 'semantic-ui-css/semantic.min.css';
 import CalculatorForm from './components/CalculatorForm';
 
@@ -17,6 +19,7 @@ function App() {
         <Route exact path="/" component={Dashboard}/>
         <Route exact path="/login" component={Login}/>
         <Route exact path='/signup' component={Register}/>
+        <Route path="/something" component={ResultsPage} />
       </div>
     </Router>
   );

@@ -34,6 +34,7 @@ const FormikForm = withFormik({
       console.log(res.data.token)
       localStorage.setItem('token', res.data.token)
     })
+
       .then(res => setTimeout(() => {
         props.props.history.push('/')
       }, 1000))
