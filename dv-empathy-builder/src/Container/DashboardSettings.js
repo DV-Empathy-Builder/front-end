@@ -28,7 +28,7 @@ function Settings(props, { values, errors, touched }) {
     const selectBudget = e => {
         e.preventDefault();
         console.log('selectedValue Inside Budget', selectedValue);
-        props.selectBudget(selectedValue); //holds current value of what's selected
+        props.selectBudgetId(selectedValue); //holds current value of what's selected
     };
 
     console.log('selectedValue', selectedValue);

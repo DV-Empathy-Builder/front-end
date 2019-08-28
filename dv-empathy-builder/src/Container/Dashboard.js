@@ -7,32 +7,36 @@ import React, {
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const Dashboard = props => {
-    const [saveBudget, setSaveBudget] = useState('');
-    const [saveArray, setSaveArray] = useState([]);
+    const [saveBudgetId, setSaveBudgetId] = useState();
+    const [saveBudgetLines, setSaveBudgetLines] = useState([]);
 
     const isLoggedIn = localStorage.getItem('token'); //get the localstorage key to make login true
     useEffect(() => {
-        axiosWithAuth()
-            .get('https://dv-empathy.herokuapp.com/budgets')
-            .then(res => setSaveArray(res.data))
-            .catch(err => console.log(err.response));
+        //avoids initial running
+        if (saveBudgetId) {
+            axiosWithAuth()
+                .get(`https://dv-empathy.herokuapp.com/budgets/${saveBudgetId}`)
+                .then(res => setSaveBudgetLines(res.data))
+                .catch(err => console.log(err.response));
+        }
 
         //Need to add the functionality to store the data in setState
-    }, []);
+    }, [saveBudgetId]);
     //UEH with a dependency [selectBudget] with axios call to budgets/:id
 
     //selectBudget function => create USH to track the selectedBudget, pass this down to settings
 
-    const selectBudget = value => {
+    const selectBudgetId = value => {
         // if(value === '') //change to switch statement
 
         console.log('selectedValue', value);
+        setSaveBudgetId(value); //id #
 
-        saveArray.forEach(Obj => {
-            if (value === Obj.budget_name_id) {
-                setSaveBudget(Obj);
-            }
-        });
+        // saveBudgetLines.forEach(Obj => {
+        //     if (value === Obj.budget_name_id) {
+        //         setSaveBudgetId(Obj);
+        //     }
+        // });
     };
 
     const handleSubmit = e => {
@@ -41,12 +45,11 @@ const Dashboard = props => {
         console.log(props);
         props.history.push('/something');
     };
-
+    console.log('savearray', saveBudgetLines);
     return (
         <>
-            {/* {console.log('saveBudget', saveBudget)} */}
+            {/* {console.log('saveBudgetId', saveBudgetId)} */}
             <div>
-                <h4>{saveBudget.budget_name}</h4>
                 <h2>Dashboard Page Component</h2>
             </div>
             <ComponentThatMightBeExported>
@@ -56,7 +59,7 @@ const Dashboard = props => {
                 <p>Complete this two step calculator</p>
                 <div className='dashboard-settings'>
                     {isLoggedIn ? (
-                        <Settings selectBudget={selectBudget} />
+                        <Settings selectBudgetId={selectBudgetId} />
                     ) : (
                         'Please sign in'
                     )}
