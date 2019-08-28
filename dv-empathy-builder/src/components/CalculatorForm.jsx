@@ -3,14 +3,13 @@ import React, { useEffect, useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import FormikBudgetForm from "./BudgetForm";
 
-
 const CalculatorForm = () => {
   const [CategoriesState, SetCategories] = useState([]);
   useEffect(() => {
     axiosWithAuth()
       .get("https://dv-empathy.herokuapp.com/categories/")
       .then(res => {
-        console.log("Categories", res.data);
+        // console.log("Categories", res.data);
         SetCategories(res.data);
       })
       .catch(err => console.log(err.response));
@@ -23,7 +22,5 @@ const CalculatorForm = () => {
     </div>
   );
 };
-
-
 
 export default CalculatorForm;
