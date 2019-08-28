@@ -7,11 +7,10 @@ const BudgetForm = props => {
   const personalBudget = props.categories.filter(function(cat) {
     return cat.category_type === "Personal";
   });
+
   const relocationBudget = props.categories.filter(function(cat) {
     return cat.category_type === "Relocation";
   });
-  console.log(personalBudget);
-  console.log(relocationBudget);
   return (
     <div className="form-container">
       <Form className="form">
@@ -39,8 +38,28 @@ const BudgetForm = props => {
     </div>
   );
 };
-
-export default BudgetForm;
+//state names that will be assigned to formiks 'value'prop
+const FormikBudgetForm = withFormik(
+  {
+    //   mapPropsToValues({ category }) {
+    //     //State values.
+    //     //formName: statName
+    //     category: category.category || "";
+    //   };
+  }
+  //Handling a submit on the form
+  // handleSubmit(values, {setStatus, resetForm}){
+  //     axios
+  //     .post("url", values)
+  //     .then(res => {
+  //         console.log(res.data)
+  //         setStatus(res.data)
+  //         resetForm();
+  //     })
+  // }
+)(BudgetForm);
+export default FormikBudgetForm;
+// export default BudgetForm;
 //map props to values here
 //need yup validation
 //create state called total

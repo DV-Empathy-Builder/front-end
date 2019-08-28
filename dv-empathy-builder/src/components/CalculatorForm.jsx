@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-// import { Button, Divider, Form } from 'semantic-ui-react'
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import BudgetForm from "./BudgetForm";
+import FormikBudgetForm from "./BudgetForm";
 
 const CalculatorForm = () => {
   const [CategoriesState, SetCategories] = useState([]);
@@ -17,7 +16,8 @@ const CalculatorForm = () => {
   if (!CategoriesState) return <h3>loading...</h3>;
   return (
     <div className="budget-parent">
-      <BudgetForm categories={CategoriesState} />
+      {/* <BudgetForm categories={CategoriesState} /> */}
+      <FormikBudgetForm categories={CategoriesState} />
     </div>
   );
 };

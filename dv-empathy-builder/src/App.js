@@ -15,10 +15,10 @@ function App() {
     <Router>
       <div className="App">
         <CalculatorForm />
-        {/* <Route exact path="/" component={Dashboard}/>
-        <Route exact path="/login" component={Login}/>
-        <Route exact path='/signup' component={Register}/>
-        <Route path="/something" component={ResultsPage} /> */}
+        <Route exact path="/" component={Dashboard} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Register} />
+        <Route path="/something" component={ResultsPage} />
       </div>
     </Router>
   );

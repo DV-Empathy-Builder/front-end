@@ -1,18 +1,18 @@
 import React from "react";
 import { Field } from "formik";
 
-const FormInput = props => {
+const FormInput = ({ category }) => {
   return (
-    <label>
-      {props.category.name}
+    <>
+      <label>{category.category_name}</label>
       <Field
         type="number"
         min="0"
         step="0.01"
-        name={props.category.name}
+        name={category.category_name}
         placeholder="$0"
       />
-    </label>
+    </>
   );
 };
 
