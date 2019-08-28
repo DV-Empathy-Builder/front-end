@@ -16,7 +16,7 @@ useEffect(()=>{
 })
 
 const handleSubmit = (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     console.log('hello')
     console.log(props)
     props.history.push('/something')
