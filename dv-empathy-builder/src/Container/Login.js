@@ -1,7 +1,7 @@
-import React from 'react'
-import { Form as Formik, Field, withFormik } from 'formik'
-import { Segment, Form, Button } from 'semantic-ui-react'
-import axios from 'axios'
+import React from "react";
+import { Form as Formik, Field, withFormik } from "formik";
+import { Segment, Form, Button } from "semantic-ui-react";
+import axios from "axios";
 
 const Login = props => {
   return (
@@ -18,29 +18,30 @@ const Login = props => {
         </Formik>
       </Form>
     </Segment>
-  )
-}
+  );
+};
 
 const FormikForm = withFormik({
   mapPropsToValues(values) {
     return {
-      username: values.username || '',
-      password: values.password || ''
-    }
+      username: values.username || "",
+      password: values.password || ""
+    };
   },
   handleSubmit(values, props) {
-    axios.post('https://dv-empathy.herokuapp.com/auth/login', values)
-
-    .then(res => {
-      console.log(res.data.token)
-      localStorage.setItem('token', res.data.token)
-    })
-
-      .then(res => setTimeout(() => {
-        props.props.history.push('/')
-      }, 1000))
-      .catch(err => console.log(err))
+    axios
+      .post("https://dv-empathy.herokuapp.com/auth/login", values)
+      .then(res => {
+        localStorage.setItem("token", res.data.token);
+        console.log("res", res);
+      })
+      .then(res =>
+        setTimeout(() => {
+          props.props.history.push("/");
+        }, 1000)
+      )
+      .catch(err => console.log(err));
   }
-})(Login)
+})(Login);
 
-export default FormikForm
+export default FormikForm;
