@@ -30,10 +30,12 @@ const CalculatorForm = () => {
             <div>
                 <h3>STEP ONE: PERSONAL MONTHLY BUDGET</h3>
                 <p>If none, enter $0 (Zero)</p>
-            </div>
-            
 
-   
+            </div>    
+            <BudgetForm/>
+
+            </div>
+
         </div>
     );    
 }
