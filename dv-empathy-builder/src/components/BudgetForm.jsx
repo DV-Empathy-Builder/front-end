@@ -40,14 +40,14 @@ const BudgetForm = props => {
   );
 };
 //state names that will be assigned to formiks 'value'prop
-const FormikBudgetForm = withFormik(
-  {
-    //   mapPropsToValues({ category }) {
-    //     //State values.
-    //     //formName: statName
-    //     category: category.category || "";
-    //   };
-  }
+const FormikBudgetForm = withFormik({
+  
+      mapPropsToValues(props, value) {
+        //State values.
+        //formName: statName
+        console.log(props)
+      }
+  
   //Handling a submit on the form
   // handleSubmit(values, {setStatus, resetForm}){
   //     axios
@@ -58,7 +58,7 @@ const FormikBudgetForm = withFormik(
   //         resetForm();
   //     })
   // }
-)(BudgetForm);
+    })(BudgetForm);
 export default FormikBudgetForm;
 // export default BudgetForm;
 //map props to values here

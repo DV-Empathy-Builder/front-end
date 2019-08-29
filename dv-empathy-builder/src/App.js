@@ -11,9 +11,6 @@ import 'semantic-ui-css/semantic.min.css';
 import CalculatorForm from './components/CalculatorForm';
 
 
-import "semantic-ui-css/semantic.min.css";
-import CalculatorForm from "./components/CalculatorForm";
-
 function App() {
   return (
     <Router>
