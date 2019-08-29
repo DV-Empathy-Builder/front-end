@@ -3,25 +3,32 @@ import { withFormik, Form, Field } from 'formik';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import axios from 'axios';
 import * as Yup from 'yup';
+import EditForm from '../components/EditForm';
 
 function Settings(props, { values, errors, touched }) {
     const [saveBudget, setSaveBudget] = useState([]);
+    const [edit, setEdit] = useState();
     const [selectedValue, setSelectedValue] = useState();
     const initialFormState = { name: '' };
     const [budgetName, setBudgetName] = useState({ budget_name: '' });
+    // const [note, setNote]
 
     console.log('selected value', selectedValue);
 
     console.log('props', props);
     useEffect(() => {
         fetchData();
-    }, [budgetName]);
+    }, []);
+    // [budgetName]
 
     const fetchData = () => {
         axiosWithAuth() //accesses local storage in JSON format
             .get('https://dv-empathy.herokuapp.com/budgets')
-            .then(res => setSaveBudget(res.data)) //Need to add the functionality to store the data in setState
-            .then(res => console.log('res.data1', res.data))
+            .then(res => {
+                setSaveBudget(res.data);
+                console.log('res inside fetchdata', res);
+            }) //Need to add the functionality to store the data in setState
+            // .then(res => console.log('res.data1', res.data))
             .catch(err => console.log(err.response));
     };
 
@@ -57,15 +64,15 @@ function Settings(props, { values, errors, touched }) {
     };
 
     //Update Submit Button
-    const handleUpdate = (note, id) => {
+    const handleUpdate = id => {
         axiosWithAuth()
-            .put(`https://dv-empathy.herokuapp.com/budgets/${id}`, note)
-            .then(res => setBudgetName(res.data))
-            .then(res => fetchData());
+            .put(`https://dv-empathy.herokuapp.com/budgets/${id}`, budgetName)
+            .then(res => setBudgetName(res.data));
+        console.log('id', id);
     };
 
     const handleDelete = id => {
-        console.log('handle update');
+        // console.log('handle update');
         axiosWithAuth()
             .delete(`https://dv-empathy.herokuapp.com/budgets/${selectedValue}`)
             .then(res => setSaveBudget(res.data))
@@ -100,7 +107,9 @@ function Settings(props, { values, errors, touched }) {
                         {options}
                     </Field>
                     <button>View</button>
-                    <button onClick={handleUpdate}>Edit</button>
+                    <button onClick={() => handleUpdate(selectedValue)}>
+                        Edit
+                    </button>
                     <button onClick={handleDelete}> Delete</button>
                 </Form>
             </div>
