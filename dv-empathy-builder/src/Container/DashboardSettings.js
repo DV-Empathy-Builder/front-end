@@ -10,14 +10,18 @@ function Settings(props, { values, errors, touched }) {
     const initialFormState = { name: '' };
     const [budgetName, setBudgetName] = useState({ budget_name: '' });
 
+    console.log('selected value', selectedValue);
+
+    console.log('props', props);
     useEffect(() => {
         fetchData();
-    }, [saveBudget]);
+    }, [budgetName]);
 
     const fetchData = () => {
         axiosWithAuth() //accesses local storage in JSON format
             .get('https://dv-empathy.herokuapp.com/budgets')
             .then(res => setSaveBudget(res.data)) //Need to add the functionality to store the data in setState
+            .then(res => console.log('res.data1', res.data))
             .catch(err => console.log(err.response));
     };
 
@@ -43,13 +47,12 @@ function Settings(props, { values, errors, touched }) {
         setBudgetName({ budget_name: e.target.value });
     };
 
-    //View Submit Button
+    //Add Submit Button
     const handleInputChange = note => {
         note.preventDefault();
         axiosWithAuth()
             .post('https://dv-empathy.herokuapp.com/budgets', budgetName)
-            .then(res => console.log(res.data))
-            // .then(res => setBudgetName(res.data))
+            .then(res => setBudgetName(res.data))
             .catch(err => console.log('error', err));
     };
 
@@ -58,17 +61,19 @@ function Settings(props, { values, errors, touched }) {
     const handleUpdate = (note, id) => {
         // console.log('handle update');
         axiosWithAuth()
-            .put(`https://dv-empathy.herokuapp.com/budgets/:${id}`, note)
-            .then(res => console.log('res', res))
+            .put(`https://dv-empathy.herokuapp.com/budgets/${id}`, note)
+            // .then(res => console.log('res', res))
+            .then(res => setBudgetName(res.data))
             .then(res => fetchData());
     };
 
-    const handleDelete = (note, id) => {
+    const handleDelete = id => {
         console.log('handle update');
         axiosWithAuth()
-            .put(`https://dv-empathy.herokuapp.com/budgets/:${id}`, note)
-            .then(res => console.log('res', res))
-            .then(res => console.log('res', res));
+            .delete(`https://dv-empathy.herokuapp.com/budgets/${selectedValue}`)
+            // .then(res => console.log('res', res))
+            .then(res => setSaveBudget(res.data))
+            .catch(err => console.log(err.response));
     };
 
     console.log('selectedValue', selectedValue);

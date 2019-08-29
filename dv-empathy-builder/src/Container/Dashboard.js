@@ -17,7 +17,9 @@ const Dashboard = props => {
         if (saveBudgetId) {
             axiosWithAuth()
                 .get(`https://dv-empathy.herokuapp.com/budgets/${saveBudgetId}`)
-                .then(res => setSaveBudgetLines(res.data)) //Need to add the functionality to store the data in setState
+                .then(res => setSaveBudgetLines(res.data))
+                //Need to add the functionality to store the data in setState
+                .then(res => console.log('res2', res))
 
                 .catch(err => console.log(err.response));
         }
