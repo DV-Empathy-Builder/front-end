@@ -7,9 +7,10 @@ import EditForm from '../components/EditForm';
 
 function Settings(props, { values, errors, touched }) {
     const [saveBudget, setSaveBudget] = useState([]);
-    const [edit, setEdit] = useState();
+    const [edit, setEdit] = useState(true);
     const [selectedValue, setSelectedValue] = useState();
-    const initialFormState = { name: '' };
+    const [selected, setSelected] = useState();
+    // const initialFormState = { name: '' };
     const [budgetName, setBudgetName] = useState({ budget_name: '' });
 
     // const [note, setNote]
@@ -33,11 +34,16 @@ function Settings(props, { values, errors, touched }) {
             .catch(err => console.log(err.response));
     };
 
-    let options =
-        saveBudget.length > 0 &&
-        saveBudget.map(item => (
-            <option value={item.budget_name_id}>{item.budget_name}</option>
-        ));
+    let options = edit
+        ? saveBudget.length > 0 &&
+          saveBudget.map(item => (
+              <option value={item.budget_name}>{item.budget_name}</option>
+          ))
+        : saveBudget.length > 0 &&
+          saveBudget.map(item => (
+              <option value={item.budget_name_id}>{item.budget_name}</option>
+          ));
+
     console.log('savebudget', saveBudget);
 
     //handleChanges function to track value of Field e.target.value
@@ -66,7 +72,9 @@ function Settings(props, { values, errors, touched }) {
 
     //Update Submit Button
     const handleUpdate = id => {
+        console.log('Variable', edit);
         setEdit(true);
+        setSelected(selectedValue);
 
         axiosWithAuth()
             .put(`https://dv-empathy.herokuapp.com/budgets/${id}`, budgetName)
@@ -93,17 +101,14 @@ function Settings(props, { values, errors, touched }) {
                 <div>
                     {edit ? (
                         <form>
-                            <input
-                                value={budgetName.budget_name}
-                                onChange={handleChange}
-                            />
+                            <input value={selected} onChange={handleChanges} />
                             <button onClick={handleInputChange}>Update</button>
                         </form>
                     ) : (
                         <form>
                             <input
                                 value={budgetName.budget_name}
-                                onChange={handleChange}
+                                onChange={handleChanges}
                             />
                             <button onClick={handleInputChange}>
                                 Add Budget
@@ -116,15 +121,13 @@ function Settings(props, { values, errors, touched }) {
                     {/* on submit, user is choosing a budget. use props.selectBudget and pass it this id - id is tracked in the selectedValue*/}
                     <Field
                         component='select'
-                        name='meal'
+                        name='budget_name'
                         value={selectedValue}
                         onChange={handleChanges}>
                         {options}
                     </Field>
                     <button>View</button>
-                    <button onClick={() => handleUpdate(selectedValue)}>
-                        Edit
-                    </button>
+                    <button onClick={() => handleUpdate()}>Edit</button>
                     <button onClick={handleDelete}> Delete</button>
                 </Form>
             </div>
@@ -133,9 +136,9 @@ function Settings(props, { values, errors, touched }) {
 }
 
 const FormikForm = withFormik({
-    mapPropsToValues({ meal }) {
+    mapPropsToValues({ budget_name }) {
         return {
-            meal: meal || 'silver',
+            budget_name: budget_name || 'random',
         };
     },
 
