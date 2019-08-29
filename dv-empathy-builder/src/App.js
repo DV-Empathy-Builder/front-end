@@ -9,6 +9,7 @@ import ResultsPage from "./Container/ResultsPage";
 import "semantic-ui-css/semantic.min.css";
 import CalculatorForm from "./components/CalculatorForm";
 
+
 function App() {
     return (
         <Router>

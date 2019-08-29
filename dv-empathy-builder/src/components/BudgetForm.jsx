@@ -57,7 +57,6 @@ const FormikBudgetForm = withFormik({
   //Handling a submit on the form
   handleSubmit(values, { setStatus, resetForm }) {}
 })(BudgetForm);
-
 export default FormikBudgetForm;
 // export default BudgetForm;
 //map props to values here
