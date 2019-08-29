@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import axios from 'axios';
 import * as Yup from 'yup';
 
 function Settings(props, { values, errors, touched }) {
     const [saveBudget, setSaveBudget] = useState([]);
     const [selectedValue, setSelectedValue] = useState();
     const initialFormState = { name: '' };
-    const [budgetName, setBudgetName] = useState(initialFormState);
+    const [budgetName, setBudgetName] = useState({ name: '' });
     useEffect(() => {
         axiosWithAuth()
             .get('https://dv-empathy.herokuapp.com/budgets')
@@ -33,10 +34,26 @@ function Settings(props, { values, errors, touched }) {
         props.selectBudgetId(selectedValue); //holds current value of what's selected
     };
 
+    const handleChange = e => {
+        setBudgetName({ name: e.target.value });
+    };
+
     const handleInputChange = note => {
-        // const { name, value } = e.target;
-        // setBudgetName({ ...budgetName, [name]: value });
-        axiosWithAuth().post(`https://dv-empathy.herokuapp.com/budgets`, note);
+        note.preventDefault();
+        const storageKey = localStorage.getItem('token'); //getting local storage data
+        const headers = {
+            Authorization: storageKey,
+        };
+        axios
+            .post(
+                'https://dv-empathy.herokuapp.com/budgets',
+                {
+                    budget_name: 'Ebi',
+                },
+                headers
+            )
+            .then(res => console.log('res.data'))
+            .catch(err => console.log('error', err));
     };
 
     console.log('selectedValue', selectedValue);
@@ -49,8 +66,8 @@ function Settings(props, { values, errors, touched }) {
             <div className='loginForm'>
                 <div>
                     <form>
-                        <input />
-                        <button>Add Budget</button>
+                        <input onchange={handleChange} />
+                        <button onClick={handleInputChange}>Add Budget</button>
                     </form>
                 </div>
                 <Form onSubmit={selectBudget}>
@@ -62,9 +79,6 @@ function Settings(props, { values, errors, touched }) {
                         value={selectedValue}
                         onChange={handleChanges}>
                         {options}
-                        {/* <option value='gold'>Gold</option>
-                        <option value='silver'>Silver</option>
-                        <option value='platinum'>Platinum</option> */}
                     </Field>
                     <button>View</button>
                     <button>Remove</button>
