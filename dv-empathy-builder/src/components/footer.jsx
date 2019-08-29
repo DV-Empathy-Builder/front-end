@@ -7,19 +7,19 @@ const Footer = () => {
       <div class="contentIcons">
         <ul class="social">
           <a href=" info@freefrom.org ">
-            <img src="/socialmedia img/emailbutton.PNG"></img>
+            <img src="https://i.imgur.com/k0y2VV1.png"></img>
           </a>
           <a href=" https://www.facebook.com/freefrom.org/">
-            <img src="/socialmedia img/facebook.PNG"></img>
+            <img src="https://i.imgur.com/Ny6O0uA.png"></img>
           </a>
           <a href="https://twitter.com/freefromorg">
-            <img src="/socialmedia img/twitter.PNG"></img>
+            <img src="https://i.imgur.com/x2CIUvg.png"></img>
           </a>
           <a href="https://www.linkedin.com/company/freefrom">
-            <img src="/socialmedia img/indeed.PNG"></img>
+            <img src="https://i.imgur.com/H17EkSg.png"></img>
           </a>
           <a href="https://www.instagram.com/freefromdotorg/">
-            <img src="/socialmedia img/instagram.PNG"></img>
+            <img src="https://i.imgur.com/xQJhFIE.png"></img>
           </a>
         </ul>
       </div>

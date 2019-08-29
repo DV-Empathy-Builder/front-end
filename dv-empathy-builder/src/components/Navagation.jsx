@@ -6,7 +6,7 @@ const Navagation = () => {
       <div class="navbar">
         {/* <!--logo--> */}
         <div class="img-container">
-          <img src="img/logo-small.jpg" alt="logo"></img>
+          <img src="https://i.imgur.com/shod0Zn.jpg" alt="logo"></img>
         </div>
 
         {/* <!--wrapper for nav--> */}
@@ -67,7 +67,7 @@ const Navagation = () => {
       </div>
 
       <div class="header-img">
-        <img src="../img/header-img.png"></img>
+        <img src="https://i.imgur.com/Nz7E3V9.png"></img>
         <h1 class="header-text">MONTHLY BUDGET AND RELOCATION CALCULATOR</h1>
       </div>
     </header>

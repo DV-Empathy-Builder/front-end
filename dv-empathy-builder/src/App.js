@@ -10,7 +10,7 @@ import Login from "./Container/Login";
 import Register from "./Container/Register";
 import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./Container/Dashboard";
-import Footer from "./components/Footer";
+import Footer from "./components/footer";
 import "semantic-ui-css/semantic.min.css";
 import Navagation from "./components/Navagation";
 
