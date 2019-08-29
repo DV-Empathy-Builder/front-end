@@ -9,12 +9,13 @@ function Settings(props, { values, errors, touched }) {
     const [selectedValue, setSelectedValue] = useState();
     const initialFormState = { name: '' };
     const [budgetName, setBudgetName] = useState({ budget_name: '' });
-    useEffect(() => {
+
+    const fetchData = () => {
         axiosWithAuth() //accesses local storage in JSON format
             .get('https://dv-empathy.herokuapp.com/budgets')
             .then(res => setSaveBudget(res.data)) //Need to add the functionality to store the data in setState
             .catch(err => console.log(err.response));
-    }, []);
+    };
 
     let options =
         saveBudget.length > 0 &&
@@ -38,6 +39,7 @@ function Settings(props, { values, errors, touched }) {
         setBudgetName({ name: e.target.value });
     };
 
+    //View Submit Button
     const handleInputChange = note => {
         note.preventDefault();
         axiosWithAuth()
@@ -48,6 +50,28 @@ function Settings(props, { values, errors, touched }) {
             // .then(res => setBudgetName(res.data))
             .catch(err => console.log('error', err));
     };
+
+    //Update Submit Button
+
+    const handleUpdate = (note, id) => {
+        // console.log('handle update');
+        axiosWithAuth()
+            .put(`https://dv-empathy.herokuapp.com/budgets/:${id}`, note)
+            .then(res => console.log('res', res))
+            .then(res => fetchData());
+    };
+
+    const handleDelete = (note, id) => {
+        console.log('handle update');
+        axiosWithAuth()
+            .put(`https://dv-empathy.herokuapp.com/budgets/:${id}`, note)
+            .then(res => console.log('res', res))
+            .then(res => console.log('res', res));
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     console.log('selectedValue', selectedValue);
 
@@ -76,7 +100,7 @@ function Settings(props, { values, errors, touched }) {
                         {options}
                     </Field>
                     <button>View</button>
-                    <button>Remove</button>
+                    <button onClick={handleUpdate}>Edit</button>
                     <button>Delete</button>
                 </Form>
             </div>
