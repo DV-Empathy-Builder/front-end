@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Navagation = () => {
   return (
@@ -17,38 +18,38 @@ const Navagation = () => {
                 <nav>
                   <ul>
                     <li>
-                      <a href="#">HOME</a>
+                      <Link to="/">HOME</Link>
                     </li>
                     <li>
-                      <a class="current_page" href="#">
+                      <Link className="current_page" to="/dashboard">
                         CALCULATOR
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="#">OUR WORK</a>
+                      <Link to="#">OUR WORK</Link>
                     </li>
                     <li>
-                      <a href="#">TEAM</a>
+                      <Link to="#">TEAM</Link>
                     </li>
                     <li>
-                      <a href="#">SURVIVOR WEALTH SUMMIT</a>
+                      <Link to="#">SURVIVOR WEALTH SUMMIT</Link>
                     </li>
                     <li>
-                      <a href="#">SHOP</a>
+                      <Link to="#">SHOP</Link>
                     </li>
                     <li>
-                      <a href="#">GET COMPENSATION</a>
+                      <Link to="#">GET COMPENSATION</Link>
                     </li>
                     <li>
-                      <a href="#">NEWS</a>
+                      <Link to="#">NEWS</Link>
                     </li>
                     <li>
-                      <a href="#">CONTACT</a>
+                      <Link to="#">CONTACT</Link>
                     </li>
                     <li>
-                      <a class="donate" href="#">
+                      <Link className="donate" to="#">
                         DONATE
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </nav>
