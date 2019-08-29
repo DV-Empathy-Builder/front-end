@@ -8,20 +8,20 @@ import Dashboard from "./Container/Dashboard";
 import ResultsPage from "./Container/ResultsPage";
 import "semantic-ui-css/semantic.min.css";
 import CalculatorForm from "./components/CalculatorForm";
+import CalHeader from "./components/Header";
 
 
 function App() {
-    return (
-        <Router>
-            <div className='App'>
-                {/* <CalculatorForm /> */}
-                <Route exact path='/' component={Dashboard} />
-                <Route exact path='/login' component={Login} />
-                <Route exact path='/signup' component={Register} />
-                <Route path='/something' component={ResultsPage} />
-            </div>
-        </Router>
-    );
+  return (
+    <Router>
+      <div className="App">
+        <Route exact path="/" component={Dashboard} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Register} />
+        <Route path="/something" component={ResultsPage} />
+      </div>
+    </Router>
+  );
 }
 
 export default App;
