@@ -3,7 +3,7 @@ import FormikRelocationForm from "./RelocationForm";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import FormikBudgetForm from "./BudgetForm";
 
-const CalculatorForm = () => {
+const CalculatorForm = props => {
   const [CategoriesState, SetCategories] = useState([]);
   useEffect(() => {
     axiosWithAuth()
@@ -24,11 +24,20 @@ const CalculatorForm = () => {
   return (
     <div className="budget-parent">
       {/* <BudgetForm categories={CategoriesState} /> */}
-      <FormikBudgetForm categories={personalBudget} />
-      <FormikRelocationForm categories={relocationBudget} />
-      <div className="calculate">
-        <button type="submit">Calculate Cost</button>
-      </div>
+      <FormikBudgetForm
+        type={"personal"}
+        text={"STEP ONE: PERSONAL MONTHLY BUDGET"}
+        categories={personalBudget}
+        getValues={props.getValues}
+        calculatingCost={props.calculatingCost}
+      />
+      <FormikBudgetForm
+        type={"relocation"}
+        text={"STEP TWO: RELOCATION COSTS"}
+        categories={relocationBudget}
+        getValues={props.getValues}
+        calculatingCost={props.calculatingCost}
+      />
     </div>
   );
 };

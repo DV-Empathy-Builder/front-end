@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form as Formik, Field, withFormik } from "formik";
 import { Segment, Form, Button } from "semantic-ui-react";
 import FormInput from "./FormInput";
 import "../App.css";
 
-const BudgetForm = ({ categories, values }) => {
+const BudgetForm = ({
+  categories,
+  text,
+  getValues,
+  calculatingCost,
+  type,
+  values
+}) => {
   console.log("Monthly", values);
+  useEffect(() => {
+    if (calculatingCost) getValues(values, type);
+  }, [calculatingCost]);
   return (
     <div className="form-container">
       <Form className="form">
-        <h3>STEP ONE: PERSONAL MONTHLY BUDGET</h3>
+        <h3>{text}</h3>
         <p>If none, enter $0 (Zero)</p>
         <Formik>
           <div className="montly-cost">
@@ -29,10 +39,10 @@ const FormikBudgetForm = withFormik({
     //State values.
     //formName: statName
 
-    let monthlyObj = {};
-    categories.forEach(cat => (monthlyObj[cat.category_name] = 0));
+    let valuesObj = {};
+    categories.forEach(cat => (valuesObj[cat.category_name] = 0));
 
-    return monthlyObj;
+    return valuesObj;
   },
 
   //Handling a submit on the form
