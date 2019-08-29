@@ -3,14 +3,8 @@ import { Form as Formik, Field, withFormik } from "formik";
 import { Segment, Form, Button } from "semantic-ui-react";
 import FormInput from "./FormInput";
 import "../App.css";
-const BudgetForm = ({ categories, values }) => {
-  const personalBudget = categories.filter(function(cat) {
-    return cat.category_type === "Personal";
-  });
 
-  const relocationBudget = categories.filter(function(cat) {
-    return cat.category_type === "Relocation";
-  });
+const BudgetForm = ({ categories, values }) => {
   console.log(values);
   return (
     <div className="form-container">
@@ -19,43 +13,33 @@ const BudgetForm = ({ categories, values }) => {
         <p>If none, enter $0 (Zero)</p>
         <Formik>
           <div className="montly-cost">
-            {personalBudget.map(category => (
+            {categories.map(category => (
               <FormInput category={category} />
             ))}
           </div>
         </Formik>
       </Form>
-      <Form className="form">
-        <h3>STEP TWO: RECLOCATION COST</h3>
-        <p>If none, enter $0 (Zero)</p>
-        <Formik>
-          <div className="relocation-cost">
-            {relocationBudget.map(category => (
-              <FormInput category={category} />
-            ))}
-          </div>
-        </Formik>
-      </Form>
-      
-      <div className='calculate'>
-                <button type='submit'>Calculate Cost</button>
-            </div>
     </div>
   );
 };
+//break down the forms into seperate components, add state in handler and pass state
 //state names that will be assigned to formiks 'value'prop
 const FormikBudgetForm = withFormik({
   mapPropsToValues({ categories }) {
     //State values.
     //formName: statName
-    let obj = {};
-    categories.forEach(cat => (obj[cat.category_name] = 0));
+
+    let monthlyObj = {};
+    categories.forEach(cat => (monthlyObj[cat.category_name] = 0));
     console.log(categories);
-    return obj;
+
+    return monthlyObj;
   },
 
   //Handling a submit on the form
-  handleSubmit(values, { setStatus, resetForm }) {}
+  handleSubmit(values, { monthlyObj, setStatus, resetForm }) {
+    console.log(monthlyObj);
+  }
 })(BudgetForm);
 
 export default FormikBudgetForm;
