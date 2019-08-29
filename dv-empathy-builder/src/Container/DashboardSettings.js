@@ -10,6 +10,10 @@ function Settings(props, { values, errors, touched }) {
     const initialFormState = { name: '' };
     const [budgetName, setBudgetName] = useState({ budget_name: '' });
 
+    useEffect(() => {
+        fetchData();
+    }, [saveBudget]);
+
     const fetchData = () => {
         axiosWithAuth() //accesses local storage in JSON format
             .get('https://dv-empathy.herokuapp.com/budgets')
@@ -36,16 +40,14 @@ function Settings(props, { values, errors, touched }) {
     };
 
     const handleChange = e => {
-        setBudgetName({ name: e.target.value });
+        setBudgetName({ budget_name: e.target.value });
     };
 
     //View Submit Button
     const handleInputChange = note => {
         note.preventDefault();
         axiosWithAuth()
-            .post('https://dv-empathy.herokuapp.com/budgets', {
-                budget_name: 'something',
-            })
+            .post('https://dv-empathy.herokuapp.com/budgets', budgetName)
             .then(res => console.log(res.data))
             // .then(res => setBudgetName(res.data))
             .catch(err => console.log('error', err));
@@ -69,10 +71,6 @@ function Settings(props, { values, errors, touched }) {
             .then(res => console.log('res', res));
     };
 
-    useEffect(() => {
-        fetchData();
-    }, []);
-
     console.log('selectedValue', selectedValue);
 
     return (
@@ -83,7 +81,10 @@ function Settings(props, { values, errors, touched }) {
             <div className='loginForm'>
                 <div>
                     <form>
-                        <input onchange={handleChange} />
+                        <input
+                            value={budgetName.budget_name}
+                            onChange={handleChange}
+                        />
                         <button onClick={handleInputChange}>Add Budget</button>
                         {/* <input onchange={handleChange} />
                         <button onClick={handleInputChange}>Add Budget</button> */}
@@ -101,7 +102,7 @@ function Settings(props, { values, errors, touched }) {
                     </Field>
                     <button>View</button>
                     <button onClick={handleUpdate}>Edit</button>
-                    <button>Delete</button>
+                    <button onClick={handleDelete}> Delete</button>
                 </Form>
             </div>
         </div>
