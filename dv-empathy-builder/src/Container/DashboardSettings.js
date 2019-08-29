@@ -10,7 +10,7 @@ function Settings(props, { values, errors, touched }) {
     const initialFormState = { name: '' };
     const [budgetName, setBudgetName] = useState({ name: '' });
     useEffect(() => {
-        axiosWithAuth()
+        axiosWithAuth() //accesses local storage in JSON format
             .get('https://dv-empathy.herokuapp.com/budgets')
             .then(res => setSaveBudget(res.data)) //Need to add the functionality to store the data in setState
             .catch(err => console.log(err.response));
@@ -40,19 +40,11 @@ function Settings(props, { values, errors, touched }) {
 
     const handleInputChange = note => {
         note.preventDefault();
-        const storageKey = localStorage.getItem('token'); //getting local storage data
-        const headers = {
-            Authorization: storageKey,
-        };
-        axios
-            .post(
-                'https://dv-empathy.herokuapp.com/budgets',
-                {
-                    budget_name: 'Ebi',
-                },
-                headers
-            )
-            .then(res => console.log('res.data'))
+        axiosWithAuth()
+            .post('https://dv-empathy.herokuapp.com/budgets', {
+                budget_name: 'Ebi',
+            })
+            .then(res => console.log(res.data))
             .catch(err => console.log('error', err));
     };
 

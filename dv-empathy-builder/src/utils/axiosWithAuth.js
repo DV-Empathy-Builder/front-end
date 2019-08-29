@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 
 export const axiosWithAuth = () => {
@@ -6,7 +5,8 @@ export const axiosWithAuth = () => {
 
     return axios.create({
         headers: {
-            Authorization: token
-        }
+            'content-type': 'application/json',
+            Authorization: token,
+        },
     });
 };
