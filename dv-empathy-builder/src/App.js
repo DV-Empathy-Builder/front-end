@@ -22,6 +22,7 @@ function App() {
         <Route path="/dashboard" render={props => <Dashboard {...props} />} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Register} />
+        <Route exact path="/" component={Register} />
         <Footer />
       </div>
     </Router>
