@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Navagation = () => {
   return (
@@ -18,46 +18,49 @@ const Navagation = () => {
                 <nav>
                   <ul>
                     <li>
-                      <Link to="/">HOME</Link>
+                      <a href="https://dv-empathy-builder.github.io/landing-page-merge-fix/#">
+                        Home
+                      </a>
+                      {/* <NavLink to="/">HOME</NavLink> */}
                     </li>
                     <li>
-                      <Link className="current_page" to="/dashboard">
+                      <NavLink className="current_page" to="/dashboard">
                         CALCULATOR
-                      </Link>
+                      </NavLink>
                     </li>
                     <li>
-                      <Link to="#">OUR WORK</Link>
+                      <NavLink to="#">OUR WORK</NavLink>
                     </li>
                     <li>
-                      <Link to="#">TEAM</Link>
+                      <NavLink to="#">TEAM</NavLink>
                     </li>
                     <li>
-                      <Link to="#">SURVIVOR WEALTH SUMMIT</Link>
+                      <NavLink to="#">SURVIVOR WEALTH SUMMIT</NavLink>
                     </li>
                     <li>
-                      <Link to="#">SHOP</Link>
+                      <NavLink to="#">SHOP</NavLink>
                     </li>
                     <li>
-                      <Link to="#">GET COMPENSATION</Link>
+                      <NavLink to="#">GET COMPENSATION</NavLink>
                     </li>
                     <li>
-                      <Link to="#">NEWS</Link>
+                      <NavLink to="#">NEWS</NavLink>
                     </li>
                     <li>
-                      <Link to="#">CONTACT</Link>
+                      <NavLink to="#">CONTACT</NavLink>
                     </li>
-                    <Link
+                    <NavLink
                       onClick={() => {
                         localStorage.removeItem("token");
                         window.location = "/login";
                       }}
                     >
                       LOG IN
-                    </Link>
+                    </NavLink>
                     <li>
-                      <Link className="donate" to="#">
+                      <NavLink className="donate" to="#">
                         DONATE
-                      </Link>
+                      </NavLink>
                     </li>
                   </ul>
                 </nav>
