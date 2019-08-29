@@ -47,6 +47,9 @@ const Navagation = () => {
                       <Link to="#">CONTACT</Link>
                     </li>
                     <li>
+                      <Link to="/login">LOGIN</Link>
+                    </li>
+                    <li>
                       <Link className="donate" to="#">
                         DONATE
                       </Link>
