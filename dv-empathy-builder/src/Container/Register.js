@@ -15,6 +15,7 @@ const Register = props => {
             <Field type="password" name="password" placeholder="Please enter your password" />
           </Form.Field>
           <Button type="submit">Register</Button>
+          <Button onClick={() => { window.location = '/login' }}>Login</Button>
         </Formik>
       </Form>
     </Segment>
