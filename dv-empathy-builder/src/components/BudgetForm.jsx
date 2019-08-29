@@ -5,7 +5,7 @@ import FormInput from "./FormInput";
 import "../App.css";
 
 const BudgetForm = ({ categories, values }) => {
-  console.log(values);
+  console.log("Monthly", values);
   return (
     <div className="form-container">
       <Form className="form">
@@ -31,15 +31,12 @@ const FormikBudgetForm = withFormik({
 
     let monthlyObj = {};
     categories.forEach(cat => (monthlyObj[cat.category_name] = 0));
-    console.log(categories);
 
     return monthlyObj;
   },
 
   //Handling a submit on the form
-  handleSubmit(values, { monthlyObj, setStatus, resetForm }) {
-    console.log(monthlyObj);
-  }
+  handleSubmit(values, { monthlyObj, setStatus, resetForm }) {}
 })(BudgetForm);
 
 export default FormikBudgetForm;
@@ -48,5 +45,5 @@ export default FormikBudgetForm;
 //need yup validation
 //create state called total
 //ontotal subimit action:
-//do reduce method on on both arries and add up for sum total
+
 //pass to total state

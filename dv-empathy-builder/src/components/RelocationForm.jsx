@@ -31,7 +31,11 @@ const FormikRelocationForm = withFormik({
     return relocationObj;
   },
   //Handling a submit on the form
-  handleSubmit(values, { relocationObj, setStatus, resetForm }) {}
+  handleSubmit(values, { relocationObj, setStatus, resetForm }) {
+    let GatherRelocationData = 0;
+    for (let key in relocationObj) GatherRelocationData += relocationObj[key];
+    console.log("total Relocatoin", GatherRelocationData);
+  }
 })(RelocationForm);
 
 export default FormikRelocationForm;
