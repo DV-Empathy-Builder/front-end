@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Form as Formik, Field, withFormik } from "formik";
 import { Segment, Form, Button } from "semantic-ui-react";
 import FormInput from "./FormInput";
-import "../App.css";
 
 const BudgetForm = ({
   categories,

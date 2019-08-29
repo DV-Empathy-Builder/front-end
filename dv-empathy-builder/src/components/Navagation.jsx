@@ -1,5 +1,5 @@
 import React from "react";
-import "../App.css";
+
 const Navagation = () => {
   return (
     <header>
