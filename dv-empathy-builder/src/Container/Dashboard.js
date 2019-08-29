@@ -11,7 +11,10 @@ const Dashboard = props => {
   const [saveBudgetId, setSaveBudgetId] = useState();
   const [saveBudgetLines, setSaveBudgetLines] = useState([]);
   const [calculatingCost, setCalculatingCost] = useState(false);
-  const [totalValues, setTotalValues] = useState({});
+  const [totalValues, setTotalValues] = useState({
+    personal: 0,
+    relocation: 0
+  });
   const isLoggedIn = localStorage.getItem("token"); //get the localstorage key to make login true
   useEffect(() => {
     //avoids initial running
@@ -36,14 +39,13 @@ const Dashboard = props => {
   const handleSubmit = e => {
     e.preventDefault();
     setCalculatingCost(true);
-    console.log("hello");
-    console.log(props);
-    //props.history.push("/something");
+    props.history.push("/something");
+    setCalculatingCost(false);
   };
 
   const getValues = (values, type) => {
-      for()
-    console.log(type, values);
+    for (let key in values) totalValues[type] += values[key];
+    console.log(totalValues);
   };
   // console.log('savearray', saveBudgetLines);
   return (

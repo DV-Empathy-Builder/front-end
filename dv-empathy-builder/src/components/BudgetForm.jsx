@@ -12,7 +12,6 @@ const BudgetForm = ({
   type,
   values
 }) => {
-  console.log("Monthly", values);
   useEffect(() => {
     if (calculatingCost) getValues(values, type);
   }, [calculatingCost]);
