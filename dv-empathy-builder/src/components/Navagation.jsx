@@ -46,9 +46,14 @@ const Navagation = () => {
                     <li>
                       <Link to="#">CONTACT</Link>
                     </li>
-                    <li>
-                      <Link to="/login">LOGIN</Link>
-                    </li>
+                    <Link
+                      onClick={() => {
+                        localStorage.removeItem("token");
+                        window.location = "/login";
+                      }}
+                    >
+                      LOG IN
+                    </Link>
                     <li>
                       <Link className="donate" to="#">
                         DONATE
