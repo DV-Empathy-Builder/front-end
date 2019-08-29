@@ -1,20 +1,20 @@
-import React, {Context} from 'react'
-import {Segment, Item, Icon, Button, Label} from 'semantic-ui-react'
+import React, { Context } from 'react'
+import { Segment, Item, Icon, Button, Label } from 'semantic-ui-react'
+import { PersonalContext } from '../../Container/ResultsPage'
+import { axiosWithAuth } from '../../utils/axiosWithAuth'
 
-import {axiosWithAuth} from '../../utils/axiosWithAuth'
-
-const PersonalResults = (props)=>{
-    return(
-        <ResultsContext.Consumer>
-            {(context)=>(
+const PersonalResults = (props) => {
+    return (
+        <PersonalContext.Consumer>
+            {(context) => (
                 <Item>
                     <Item.Header>
-                        Personal Monthly Budget Total ${context.personalTotal}
+                        <h1>Personal Monthly Budget Total ${context.personal}</h1>
                     </Item.Header>
-                    <Label icon='calculator'/>
+                    <Label icon='calculator' />
                 </Item>
             )}
-        </ResultsContext.Consumer>
+        </PersonalContext.Consumer>
     )
 }
 
