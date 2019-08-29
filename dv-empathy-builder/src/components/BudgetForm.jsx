@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Form as Formik, Field, withFormik } from "formik";
 import { Segment, Form, Button } from "semantic-ui-react";
 import FormInput from "./FormInput";
+import * as Yup from "yup";
 
 const BudgetForm = ({
   categories,
@@ -42,6 +43,9 @@ const FormikBudgetForm = withFormik({
 
     return valuesObj;
   },
+  // validationSchema: Yup.object().shape({
+  //   valuesObj: Yup.number().required("0 or a number is required")
+  // }),
 
   //Handling a submit on the form
   handleSubmit(values, { monthlyObj, setStatus, resetForm }) {}
