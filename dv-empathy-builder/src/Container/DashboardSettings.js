@@ -57,12 +57,9 @@ function Settings(props, { values, errors, touched }) {
     };
 
     //Update Submit Button
-
     const handleUpdate = (note, id) => {
-        // console.log('handle update');
         axiosWithAuth()
             .put(`https://dv-empathy.herokuapp.com/budgets/${id}`, note)
-            // .then(res => console.log('res', res))
             .then(res => setBudgetName(res.data))
             .then(res => fetchData());
     };
@@ -71,7 +68,6 @@ function Settings(props, { values, errors, touched }) {
         console.log('handle update');
         axiosWithAuth()
             .delete(`https://dv-empathy.herokuapp.com/budgets/${selectedValue}`)
-            // .then(res => console.log('res', res))
             .then(res => setSaveBudget(res.data))
             .catch(err => console.log(err.response));
     };
@@ -91,8 +87,6 @@ function Settings(props, { values, errors, touched }) {
                             onChange={handleChange}
                         />
                         <button onClick={handleInputChange}>Add Budget</button>
-                        {/* <input onchange={handleChange} />
-                        <button onClick={handleInputChange}>Add Budget</button> */}
                     </form>
                 </div>
                 <Form onSubmit={selectBudget}>
