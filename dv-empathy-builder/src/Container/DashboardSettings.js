@@ -73,7 +73,7 @@ function Settings(props, { values, errors, touched }) {
     //Update Submit Button
     const handleUpdate = id => {
         console.log('Variable', edit);
-        setEdit(true);
+        setEdit();
         setSelected(selectedValue);
 
         axiosWithAuth()
@@ -101,11 +101,6 @@ function Settings(props, { values, errors, touched }) {
                 <div>
                     {edit ? (
                         <form>
-                            <input value={selected} onChange={handleChanges} />
-                            <button onClick={handleInputChange}>Update</button>
-                        </form>
-                    ) : (
-                        <form>
                             <input
                                 value={budgetName.budget_name}
                                 onChange={handleChanges}
@@ -113,6 +108,11 @@ function Settings(props, { values, errors, touched }) {
                             <button onClick={handleInputChange}>
                                 Add Budget
                             </button>
+                        </form>
+                    ) : (
+                        <form>
+                            <input value={selected} onChange={handleChanges} />
+                            <button onClick={handleInputChange}>Update</button>
                         </form>
                     )}
                 </div>
