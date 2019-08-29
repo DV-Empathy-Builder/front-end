@@ -8,7 +8,7 @@ function Settings(props, { values, errors, touched }) {
     const [saveBudget, setSaveBudget] = useState([]);
     const [selectedValue, setSelectedValue] = useState();
     const initialFormState = { name: '' };
-    const [budgetName, setBudgetName] = useState({ name: '' });
+    const [budgetName, setBudgetName] = useState({ budget_name: '' });
     useEffect(() => {
         axiosWithAuth() //accesses local storage in JSON format
             .get('https://dv-empathy.herokuapp.com/budgets')
@@ -42,9 +42,10 @@ function Settings(props, { values, errors, touched }) {
         note.preventDefault();
         axiosWithAuth()
             .post('https://dv-empathy.herokuapp.com/budgets', {
-                budget_name: 'Ebi',
+                budget_name: 'something',
             })
             .then(res => console.log(res.data))
+            // .then(res => setBudgetName(res.data))
             .catch(err => console.log('error', err));
     };
 
@@ -60,6 +61,8 @@ function Settings(props, { values, errors, touched }) {
                     <form>
                         <input onchange={handleChange} />
                         <button onClick={handleInputChange}>Add Budget</button>
+                        {/* <input onchange={handleChange} />
+                        <button onClick={handleInputChange}>Add Budget</button> */}
                     </form>
                 </div>
                 <Form onSubmit={selectBudget}>
