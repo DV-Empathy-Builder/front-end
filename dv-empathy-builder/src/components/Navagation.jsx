@@ -11,14 +11,6 @@ const Navagation = () => {
 
         {/* <!--wrapper for nav--> */}
         <div class="nav">
-          {/* <!--checkbox to toggle hamburger icon--> */}
-          <input type="checkbox" class="toggle"></input>
-
-          {/* <!--hamburger icon--> */}
-          <div class="hamburger-container">
-            <div class="hamburger"></div>
-          </div>
-
           <div class="menu">
             <div class="link-container">
               <div class="link">
