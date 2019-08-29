@@ -11,6 +11,7 @@ function Settings(props, { values, errors, touched }) {
     const [selectedValue, setSelectedValue] = useState();
     const initialFormState = { name: '' };
     const [budgetName, setBudgetName] = useState({ budget_name: '' });
+
     // const [note, setNote]
 
     console.log('selected value', selectedValue);
@@ -18,7 +19,7 @@ function Settings(props, { values, errors, touched }) {
     console.log('props', props);
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [budgetName]);
     // [budgetName]
 
     const fetchData = () => {
@@ -65,6 +66,8 @@ function Settings(props, { values, errors, touched }) {
 
     //Update Submit Button
     const handleUpdate = id => {
+        setEdit(true);
+
         axiosWithAuth()
             .put(`https://dv-empathy.herokuapp.com/budgets/${id}`, budgetName)
             .then(res => setBudgetName(res.data));
@@ -88,13 +91,25 @@ function Settings(props, { values, errors, touched }) {
             <p></p>
             <div className='loginForm'>
                 <div>
-                    <form>
-                        <input
-                            value={budgetName.budget_name}
-                            onChange={handleChange}
-                        />
-                        <button onClick={handleInputChange}>Add Budget</button>
-                    </form>
+                    {edit ? (
+                        <form>
+                            <input
+                                value={budgetName.budget_name}
+                                onChange={handleChange}
+                            />
+                            <button onClick={handleInputChange}>Update</button>
+                        </form>
+                    ) : (
+                        <form>
+                            <input
+                                value={budgetName.budget_name}
+                                onChange={handleChange}
+                            />
+                            <button onClick={handleInputChange}>
+                                Add Budget
+                            </button>
+                        </form>
+                    )}
                 </div>
                 <Form onSubmit={selectBudget}>
                     {' '}
