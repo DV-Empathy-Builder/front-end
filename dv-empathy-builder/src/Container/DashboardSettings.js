@@ -1,19 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import axios from 'axios';
 import * as Yup from 'yup';
 
 function Settings(props, { values, errors, touched }) {
     const [saveBudget, setSaveBudget] = useState([]);
     const [selectedValue, setSelectedValue] = useState();
     const initialFormState = { name: '' };
-    const [budgetName, setBudgetName] = useState(initialFormState);
+    const [budgetName, setBudgetName] = useState({ budget_name: '' });
+
+    console.log('selected value', selectedValue);
+
+    console.log('props', props);
     useEffect(() => {
-        axiosWithAuth()
+        fetchData();
+    }, [budgetName]);
+
+    const fetchData = () => {
+        axiosWithAuth() //accesses local storage in JSON format
             .get('https://dv-empathy.herokuapp.com/budgets')
             .then(res => setSaveBudget(res.data)) //Need to add the functionality to store the data in setState
+            .then(res => console.log('res.data1', res.data))
             .catch(err => console.log(err.response));
-    }, []);
+    };
 
     let options =
         saveBudget.length > 0 &&
@@ -33,10 +43,33 @@ function Settings(props, { values, errors, touched }) {
         props.selectBudgetId(selectedValue); //holds current value of what's selected
     };
 
+    const handleChange = e => {
+        setBudgetName({ budget_name: e.target.value });
+    };
+
+    //Add Submit Button
     const handleInputChange = note => {
-        // const { name, value } = e.target;
-        // setBudgetName({ ...budgetName, [name]: value });
-        axiosWithAuth().post(`https://dv-empathy.herokuapp.com/budgets`, note);
+        note.preventDefault();
+        axiosWithAuth()
+            .post('https://dv-empathy.herokuapp.com/budgets', budgetName)
+            .then(res => setBudgetName(res.data))
+            .catch(err => console.log('error', err));
+    };
+
+    //Update Submit Button
+    const handleUpdate = (note, id) => {
+        axiosWithAuth()
+            .put(`https://dv-empathy.herokuapp.com/budgets/${id}`, note)
+            .then(res => setBudgetName(res.data))
+            .then(res => fetchData());
+    };
+
+    const handleDelete = id => {
+        console.log('handle update');
+        axiosWithAuth()
+            .delete(`https://dv-empathy.herokuapp.com/budgets/${selectedValue}`)
+            .then(res => setSaveBudget(res.data))
+            .catch(err => console.log(err.response));
     };
 
     console.log('selectedValue', selectedValue);
@@ -49,8 +82,11 @@ function Settings(props, { values, errors, touched }) {
             <div className='loginForm'>
                 <div>
                     <form>
-                        <input />
-                        <button>Add Budget</button>
+                        <input
+                            value={budgetName.budget_name}
+                            onChange={handleChange}
+                        />
+                        <button onClick={handleInputChange}>Add Budget</button>
                     </form>
                 </div>
                 <Form onSubmit={selectBudget}>
@@ -62,13 +98,10 @@ function Settings(props, { values, errors, touched }) {
                         value={selectedValue}
                         onChange={handleChanges}>
                         {options}
-                        {/* <option value='gold'>Gold</option>
-                        <option value='silver'>Silver</option>
-                        <option value='platinum'>Platinum</option> */}
                     </Field>
                     <button>View</button>
-                    <button>Remove</button>
-                    <button>Delete</button>
+                    <button onClick={handleUpdate}>Edit</button>
+                    <button onClick={handleDelete}> Delete</button>
                 </Form>
             </div>
         </div>

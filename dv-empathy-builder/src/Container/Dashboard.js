@@ -30,14 +30,12 @@ const Dashboard = props => {
       axiosWithAuth()
         .get(`https://dv-empathy.herokuapp.com/budgets/${saveBudgetId}`)
         .then(res => setSaveBudgetLines(res.data)) //Need to add the functionality to store the data in setState
-
         .catch(err => console.log(err.response));
     }
   }, [saveBudgetId]); //UEH with a dependency [selectBudget] with axios call to budgets/:id
   useEffect(() => {
     if (results) props.history.push("/dashboard/results");
   }, [results]);
-  //selectBudget function => create USH to track the selectedBudget, pass this down to settings
 
   const selectBudgetId = value => {
     // if(value === '') //change to switch statement
@@ -78,9 +76,6 @@ const Dashboard = props => {
         </div>
       </ComponentThatMightBeExported>
 
-      {/* Thinking of adding some logic that has basically 2 different form components here. is LoggedIn component and public component. 
-
-Have data saved from public component exported into isLoggedIn component */}
 
       <div>
         <form onSubmit={handleSubmit}>
