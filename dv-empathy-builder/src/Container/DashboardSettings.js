@@ -10,27 +10,19 @@ function Settings(props, { values, errors, touched }) {
     const [edit, setEdit] = useState(true);
     const [selectedValue, setSelectedValue] = useState();
     const [selected, setSelected] = useState();
-    // const initialFormState = { name: '' };
     const [budgetName, setBudgetName] = useState({ budget_name: '' });
 
-    // const [note, setNote]
-
-    console.log('selected value', selectedValue);
-
-    console.log('props', props);
     useEffect(() => {
         fetchData();
     }, [budgetName]);
-    // [budgetName]
 
     const fetchData = () => {
-        axiosWithAuth() //accesses local storage in JSON format
+        axiosWithAuth()
             .get('https://dv-empathy.herokuapp.com/budgets')
             .then(res => {
                 setSaveBudget(res.data);
                 console.log('res inside fetchdata', res);
-            }) //Need to add the functionality to store the data in setState
-            // .then(res => console.log('res.data1', res.data))
+            })
             .catch(err => console.log(err.response));
     };
 
@@ -44,9 +36,6 @@ function Settings(props, { values, errors, touched }) {
               <option value={item.budget_name_id}>{item.budget_name}</option>
           ));
 
-    console.log('savebudget', saveBudget);
-
-    //handleChanges function to track value of Field e.target.value
     const handleChanges = e => {
         setSelectedValue(e.target.value);
     };
@@ -54,14 +43,13 @@ function Settings(props, { values, errors, touched }) {
     const selectBudget = e => {
         e.preventDefault();
         console.log('selectedValue Inside Budget', selectedValue);
-        props.selectBudgetId(selectedValue); //holds current value of what's selected
+        props.selectBudgetId(selectedValue);
     };
 
     const handleChange = e => {
         setBudgetName({ budget_name: e.target.value });
     };
 
-    //Add Submit Button
     const handleInputChange = note => {
         note.preventDefault();
         axiosWithAuth()
@@ -70,7 +58,6 @@ function Settings(props, { values, errors, touched }) {
             .catch(err => console.log('error', err));
     };
 
-    //Update Submit Button
     const handleUpdate = id => {
         console.log('Variable', edit);
         setEdit();
@@ -83,7 +70,6 @@ function Settings(props, { values, errors, touched }) {
     };
 
     const handleDelete = id => {
-        // console.log('handle update');
         axiosWithAuth()
             .delete(`https://dv-empathy.herokuapp.com/budgets/${selectedValue}`)
             .then(res => setSaveBudget(res.data))
@@ -118,7 +104,6 @@ function Settings(props, { values, errors, touched }) {
                 </div>
                 <Form onSubmit={selectBudget}>
                     {' '}
-                    {/* on submit, user is choosing a budget. use props.selectBudget and pass it this id - id is tracked in the selectedValue*/}
                     <Field
                         component='select'
                         name='budget_name'
