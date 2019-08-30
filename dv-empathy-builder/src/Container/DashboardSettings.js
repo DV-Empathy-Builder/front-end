@@ -78,6 +78,30 @@ function Settings(props, { values, errors, touched }) {
         setInputValue('');
     };
 
+    const addOrEdit2 = e => {
+        e.preventDefault();
+        if (isEditing) {
+            axiosWithAuth()
+                .put(
+                    `https://dv-empathy.herokuapp.com/budgets/${selectedValue}`,
+                    {
+                        budget_name: inputValue,
+                    }
+                )
+                .then(res => setSaveBudget(res.data))
+                .catch(err => console.log(err.response));
+        } else {
+            axiosWithAuth()
+                .post(`https://dv-empathy.herokuapp.com/budgets`, {
+                    budget_name: inputValue,
+                })
+                .then(res => setSaveBudget([...saveBudget, res.data]))
+                .catch(err => console.log(err));
+        }
+        setIsEditing(false);
+        setInputValue('');
+    };
+
     const handleDelete = id => {
         axiosWithAuth()
             .delete(`https://dv-empathy.herokuapp.com/budgets/${id}`)
@@ -87,22 +111,23 @@ function Settings(props, { values, errors, touched }) {
 
     return (
         <div className='message-box'>
-            <h2>This is the settings for the dashboard after you log in</h2>
+            <h2>Welcome!</h2>
 
             <p></p>
             <div className='loginForm'>
-                <div>
-                    <form>
-                        <input
+                <Form onSubmit={selectBudget}>
+                    <span className='add'>
+                        <button className='addbtn' onClick={addOrEdit}>
+                            {isEditing ? 'Update' : 'Add Budget'}
+                        </button>
+
+                        <Field
+                            placeholder='Name your Budget'
                             value={inputValue}
                             onChange={handleInputChange}
                         />
-                        <button onClick={addOrEdit}>
-                            {isEditing ? 'Update' : 'Add Budget'}
-                        </button>
-                    </form>
-                </div>
-                <Form onSubmit={selectBudget}>
+                    </span>
+
                     <Field
                         component='select'
                         name='budget_name'
@@ -110,9 +135,17 @@ function Settings(props, { values, errors, touched }) {
                         onChange={handleDropDownChanges}>
                         {options}
                     </Field>
-                    <button onclick={selectBudget}>View</button>
-                    <button onClick={handleEditClick}>Edit</button>
-                    <button onClick={() => handleDelete(selectedValue)}>
+                    <button className='addbtn view add' onclick={selectBudget}>
+                        View
+                    </button>
+                    <button
+                        className='addbtn update add'
+                        onClick={handleEditClick}>
+                        Edit
+                    </button>
+                    <button
+                        className='addbtn delete'
+                        onClick={() => handleDelete(selectedValue)}>
                         {' '}
                         Delete
                     </button>
