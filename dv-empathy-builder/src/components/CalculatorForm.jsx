@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import FormikBudgetForm from "./BudgetForm";
+import { CalculatorStyle } from "./styling/CalculatorStyle";
 
 const CalculatorForm = props => {
   const [CategoriesState, SetCategories] = useState([]);
@@ -21,7 +22,7 @@ const CalculatorForm = props => {
   });
   if (!CategoriesState) return <h3>loading...</h3>;
   return (
-    <div className="budget-parent">
+    <CalculatorStyle className="budget-parent">
       {/* <BudgetForm categories={CategoriesState} /> */}
       <FormikBudgetForm
         type={"personal"}
@@ -37,7 +38,7 @@ const CalculatorForm = props => {
         getValues={props.getValues}
         calculatingCost={props.calculatingCost}
       />
-    </div>
+    </CalculatorStyle>
   );
 };
 

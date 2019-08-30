@@ -39,13 +39,13 @@
   padding: 20px;
 }
 
-.form-container {
+/* .form-container {
   border: 2px black solid;
 }
 
 .form {
   border: 2px red solid;
-}
+} */
 /******navigation******/
 .navbar {
   display: flex;
