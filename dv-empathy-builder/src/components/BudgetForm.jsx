@@ -3,6 +3,7 @@ import { Form as Formik, Field, withFormik } from "formik";
 import { Segment, Form, Button } from "semantic-ui-react";
 import FormInput from "./FormInput";
 import * as Yup from "yup";
+import { BudgetFieldStyle } from "./styling/CalculatorStyle";
 
 const BudgetForm = ({
   categories,
@@ -21,11 +22,11 @@ const BudgetForm = ({
         <h3>{text}</h3>
         <p>If none, enter $0 (Zero)</p>
         <Formik>
-          <div className="montly-cost">
+          <BudgetFieldStyle className="montly-cost">
             {categories.map(category => (
               <FormInput category={category} />
             ))}
-          </div>
+          </BudgetFieldStyle>
         </Formik>
       </Form>
     </div>

@@ -1,10 +1,10 @@
 import React from "react";
 import { Field } from "formik";
-
+import { LabelStyle } from "./styling/CalculatorStyle";
 const FormInput = ({ category }) => {
   return (
     <>
-      <label>{category.category_name}</label>
+      <LabelStyle>{category.category_name}</LabelStyle>
       <Field
         type="number"
         min="0"
