@@ -8,6 +8,7 @@ const Register = props => {
     <Segment raised compact>
       <Form>
         <Formik>
+          <h1>Welcome, please Register, or click the button to Login.</h1>
           <Form.Field>
             <Field type="text" name="username" placeholder="Please enter a username" />
           </Form.Field>
