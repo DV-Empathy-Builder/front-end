@@ -69,11 +69,6 @@ const Navagation = () => {
           </div>
         </div>
       </div>
-
-      <div class="header-img">
-        <img src="https://i.imgur.com/Nz7E3V9.png"></img>
-        <h1 class="header-text">MONTHLY BUDGET AND RELOCATION CALCULATOR</h1>
-      </div>
     </header>
   );
 };
