@@ -1,8 +1,8 @@
 import React from "react";
-
+import { FooterStyling } from "./styling/FooterStyling";
 const Footer = () => {
   return (
-    <footer>
+    <FooterStyling>
       <div class="contentIcons">
         <ul class="social">
           <a href=" info@freefrom.org ">
@@ -28,7 +28,7 @@ const Footer = () => {
         *FreeFrom is a registered 501(c)(3) organization. All donations are tax
         deductible.
       </div>
-    </footer>
+    </FooterStyling>
   );
 };
 
