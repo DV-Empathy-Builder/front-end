@@ -21,7 +21,6 @@ function Settings(props, { values, errors, touched }) {
             .get('https://dv-empathy.herokuapp.com/budgets')
             .then(res => {
                 setSaveBudget(res.data);
-                console.log('res inside fetchdata', res);
             })
             .catch(err => console.log(err.response));
     };
@@ -42,7 +41,6 @@ function Settings(props, { values, errors, touched }) {
 
     const selectBudget = e => {
         e.preventDefault();
-        console.log('selectedValue Inside Budget', selectedValue);
         props.selectBudgetId(selectedValue);
     };
 
@@ -59,14 +57,12 @@ function Settings(props, { values, errors, touched }) {
     };
 
     const handleUpdate = id => {
-        console.log('Variable', edit);
         setEdit();
         setSelected(selectedValue);
 
         axiosWithAuth()
             .put(`https://dv-empathy.herokuapp.com/budgets/${id}`, budgetName)
             .then(res => setBudgetName(res.data));
-        console.log('id', id);
     };
 
     const handleDelete = id => {
@@ -75,8 +71,6 @@ function Settings(props, { values, errors, touched }) {
             .then(res => setSaveBudget(res.data))
             .catch(err => console.log(err.response));
     };
-
-    console.log('selectedValue', selectedValue);
 
     return (
         <div className='message-box'>
