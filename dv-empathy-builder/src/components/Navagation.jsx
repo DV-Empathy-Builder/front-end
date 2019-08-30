@@ -49,13 +49,14 @@ const Navagation = () => {
                     <li>
                       <NavLink to="#">CONTACT</NavLink>
                     </li>
+
                     <NavLink
                       onClick={() => {
                         localStorage.removeItem("token");
                         window.location = "/login";
                       }}
                     >
-                      LOG IN
+                      LOGOUT
                     </NavLink>
                     <li>
                       <NavLink className="donate" to="#">
