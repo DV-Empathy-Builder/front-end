@@ -13,12 +13,14 @@ import Dashboard from "./Container/Dashboard";
 import Footer from "./components/footer";
 import "semantic-ui-css/semantic.min.css";
 import Navagation from "./components/Navagation";
+import Header from "./components/Header";
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Navagation />
+        <Header />
         <Route path="/dashboard" render={props => <Dashboard {...props} />} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Register} />

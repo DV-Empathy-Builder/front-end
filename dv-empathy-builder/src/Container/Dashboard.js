@@ -13,7 +13,7 @@ import {
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import CalculatorForm from "../components/CalculatorForm";
 import ResultsPage from "./ResultsPage";
-
+import { ButtonStyle } from "../components/styling/CalculatorStyle";
 const Dashboard = props => {
   const [saveBudgetId, setSaveBudgetId] = useState();
   const [saveBudgetLines, setSaveBudgetLines] = useState([]);
@@ -76,7 +76,6 @@ const Dashboard = props => {
         </div>
       </ComponentThatMightBeExported>
 
-
       <div>
         <form onSubmit={handleSubmit}>
           <div className="form-setting">
@@ -93,7 +92,7 @@ const Dashboard = props => {
             />
           </div>
           <div className="calculate">
-            <button type="submit">Calculate Cost</button>
+            <ButtonStyle type="submit">Calculate Cost</ButtonStyle>
           </div>{" "}
           <Route
             path="/dashboard/results"
