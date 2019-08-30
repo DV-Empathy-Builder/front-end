@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
-import axios from 'axios';
 import * as Yup from 'yup';
-import EditForm from '../components/EditForm';
 
 function Settings(props, { values, errors, touched }) {
     const [saveBudget, setSaveBudget] = useState([]);
-    const [edit, setEdit] = useState(true);
+    const [isEditing, setIsEditing] = useState(false);
     const [selectedValue, setSelectedValue] = useState();
-    const [selected, setSelected] = useState();
-    const [budgetName, setBudgetName] = useState({ budget_name: '' });
+    const [inputValue, setInputValue] = useState('');
 
     useEffect(() => {
         fetchData();
-    }, [budgetName]);
+    }, []);
 
     const fetchData = () => {
         axiosWithAuth()
@@ -25,17 +22,15 @@ function Settings(props, { values, errors, touched }) {
             .catch(err => console.log(err.response));
     };
 
-    let options = edit
-        ? saveBudget.length > 0 &&
-          saveBudget.map(item => (
-              <option value={item.budget_name}>{item.budget_name}</option>
-          ))
-        : saveBudget.length > 0 &&
-          saveBudget.map(item => (
-              <option value={item.budget_name_id}>{item.budget_name}</option>
-          ));
+    let options =
+        saveBudget.length > 0 &&
+        saveBudget.map(item => (
+            <option value={item.budget_name_id}>{item.budget_name}</option>
+        ));
 
-    const handleChanges = e => {
+    const handleDropDownChanges = e => {
+        e.persist();
+        e.preventDefault();
         setSelectedValue(e.target.value);
     };
 
@@ -44,30 +39,48 @@ function Settings(props, { values, errors, touched }) {
         props.selectBudgetId(selectedValue);
     };
 
-    const handleChange = e => {
-        setBudgetName({ budget_name: e.target.value });
+    const handleEditClick = e => {
+        setInputValue(
+            saveBudget.filter(
+                budget => budget.budget_name_id === +selectedValue
+            )[0].budget_name
+        );
+        setIsEditing(true);
     };
 
-    const handleInputChange = note => {
-        note.preventDefault();
-        axiosWithAuth()
-            .post('https://dv-empathy.herokuapp.com/budgets', budgetName)
-            .then(res => setBudgetName(res.data))
-            .catch(err => console.log('error', err));
+    const handleInputChange = e => {
+        e.persist();
+        e.preventDefault();
+        setInputValue(e.target.value);
     };
 
-    const handleUpdate = id => {
-        setEdit();
-        setSelected(selectedValue);
-
-        axiosWithAuth()
-            .put(`https://dv-empathy.herokuapp.com/budgets/${id}`, budgetName)
-            .then(res => setBudgetName(res.data));
+    const addOrEdit = e => {
+        e.preventDefault();
+        if (isEditing) {
+            axiosWithAuth()
+                .put(
+                    `https://dv-empathy.herokuapp.com/budgets/${selectedValue}`,
+                    {
+                        budget_name: inputValue,
+                    }
+                )
+                .then(res => setSaveBudget(res.data))
+                .catch(err => console.log(err.response));
+        } else {
+            axiosWithAuth()
+                .post(`https://dv-empathy.herokuapp.com/budgets`, {
+                    budget_name: inputValue,
+                })
+                .then(res => setSaveBudget([...saveBudget, res.data]))
+                .catch(err => console.log(err));
+        }
+        setIsEditing(false);
+        setInputValue('');
     };
 
     const handleDelete = id => {
         axiosWithAuth()
-            .delete(`https://dv-empathy.herokuapp.com/budgets/${selectedValue}`)
+            .delete(`https://dv-empathy.herokuapp.com/budgets/${id}`)
             .then(res => setSaveBudget(res.data))
             .catch(err => console.log(err.response));
     };
@@ -79,35 +92,30 @@ function Settings(props, { values, errors, touched }) {
             <p></p>
             <div className='loginForm'>
                 <div>
-                    {edit ? (
-                        <form>
-                            <input
-                                value={budgetName.budget_name}
-                                onChange={handleChanges}
-                            />
-                            <button onClick={handleInputChange}>
-                                Add Budget
-                            </button>
-                        </form>
-                    ) : (
-                        <form>
-                            <input value={selected} onChange={handleChanges} />
-                            <button onClick={handleInputChange}>Update</button>
-                        </form>
-                    )}
+                    <form>
+                        <input
+                            value={inputValue}
+                            onChange={handleInputChange}
+                        />
+                        <button onClick={addOrEdit}>
+                            {isEditing ? 'Update' : 'Add Budget'}
+                        </button>
+                    </form>
                 </div>
                 <Form onSubmit={selectBudget}>
-                    {' '}
                     <Field
                         component='select'
                         name='budget_name'
                         value={selectedValue}
-                        onChange={handleChanges}>
+                        onChange={handleDropDownChanges}>
                         {options}
                     </Field>
-                    <button>View</button>
-                    <button onClick={() => handleUpdate()}>Edit</button>
-                    <button onClick={handleDelete}> Delete</button>
+                    <button onclick={selectBudget}>View</button>
+                    <button onClick={handleEditClick}>Edit</button>
+                    <button onClick={() => handleDelete(selectedValue)}>
+                        {' '}
+                        Delete
+                    </button>
                 </Form>
             </div>
         </div>
